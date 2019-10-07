@@ -4,6 +4,9 @@ import os
 import json
 
 outpath = './RoiAndPos/'
+if not output:
+    os.makedirs(outpath)
+    
 for i in range(1):##########  10
     kfb_path = './pos_'+str(i)
     name_list = os.listdir(kfb_path)

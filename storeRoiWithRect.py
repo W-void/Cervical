@@ -8,6 +8,9 @@ import pandas as pd
 
 #%%
 outpath = './RoiWithRect/'
+if not output:
+    os.makedirs(outpath)
+    
 for i in range(1):##########  10
     kfb_path = './pos_'+str(i)
     nameList = os.listdir(kfb_path)
