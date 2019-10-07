@@ -1,0 +1,4 @@
+# 忽略 json, kfb, jpg 文件
+*.json
+*.kfb
+*.jpg
