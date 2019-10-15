@@ -15,7 +15,7 @@ if not os.path.exists(imgPath):
 if not os.path.exists(labelsPath):
     os.makedirs(labelsPath)
 
-imgSize = 256
+imgSize = 600
 num = 0
 
 for i in range(1):  # 10
@@ -44,7 +44,7 @@ for i in range(1):  # 10
                 x, y, w, h = pos['x'], pos['y'], pos['w'], pos['h']
                 if((x > x0) and (y > y0) and (x+w < x0+w0) and (y+h < y0+h0)):
                     size = imgSize
-                    while((w > size) or (h>size)):
+                    while((w >= size) or (h >= size)):
                         size *= 2
                     dx, dy = np.random.randint(0, size-w), np.random.randint(0, size-h)
                     x_, y_ = x - dx, y - dy
