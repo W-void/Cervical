@@ -2,3 +2,9 @@
 *.json
 *.kfb
 *.jpg
+*.png
+*.txt
+*.xml
+# 忽略PyTorch-YOLOv3 下的所有文件
+PyTorch-YOLOv3/
+faster-rcnn.pytorch/
