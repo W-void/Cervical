@@ -5,8 +5,9 @@
 *.png
 *.txt
 *.xml
+*.pyc 
 # 忽略文件夹下的所有文件
-PyTorch-YOLOv3-master/
+PyTorch-YOLOv3-master/logs/
+PyTorch-YOLOv3-master/checkpoints/
 faster-rcnn.pytorch-master/
 mmdetection-master/
-!PyTorch-YOLOv3-master/cervical_detection_dataset.py
