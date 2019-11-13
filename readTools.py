@@ -4,15 +4,17 @@ import cv2 as cv
 
 
 #%%
-path = 'D:\Data\gongjingai\pos_0\pos_0\T2019_53.kfb'
+path = './pos_0/T2019_53.kfb'
 scale = 20
 read = kfbReader.reader()
 read.ReadInfo(path, scale, True)
+print(read.getWidth(), read.getHeight())
 
 #%%
-roi = read.ReadRoi(10240, 10240, 512, 512, scale)
+roi = read.ReadRoi(48000, 46000, 512, 512, scale)
 cv.imshow('roi', roi)
 cv.waitKey(0)
+cv.destroyAllWindows()
 
 #%%
 height = read.getHeight()

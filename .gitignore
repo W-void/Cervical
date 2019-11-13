@@ -8,3 +8,5 @@
 # 忽略文件夹下的所有文件
 PyTorch-YOLOv3-master/
 faster-rcnn.pytorch-master/
+mmdetection-master/
+!PyTorch-YOLOv3-master/cervical_detection_dataset.py
