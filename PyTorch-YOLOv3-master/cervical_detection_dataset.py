@@ -67,7 +67,7 @@ def sliding_window(image_w, image_h, window_size, step_size):
     return l
 
 class ImageFolder(Dataset):
-    def __init__(self, kfbread, winSize=600, imgSize=416, stepSize=500):
+    def __init__(self, kfbread, winSize=600, imgSize=416, stepSize=550):
         self.kfbread = kfbread
         self.fullImg_width = self.kfbread.getWidth()                 # 读取全图的宽度
         self.fullImg_heigth = self.kfbread.getHeight()               # 读取全图的高度
@@ -117,7 +117,7 @@ def main():
 
     SCALE       = 20          # 缩放尺度
     window_size = 600         # 滑窗大小(w, h)
-    step_size   = 500         # 滑窗步进(dx, dy)
+    step_size   = 550         # 滑窗步进(dx, dy)
     checkpoint  = 0           # 从检查点开始，检查点为上一次最后生成的json文件的顺序索引
 
     # 初始化模型
@@ -176,10 +176,6 @@ def main():
         # 滑动窗口检测
         bboxes_list = []
         # bbox_dict = {}    # 错误定义的地方
-        window_cnt = 0
-        #window_nums = ((fullImg_width-window_size[0]+step_size[0])//step_size[0]) * ((fullImg_heigth-window_size[1]+step_size[1])//step_size[1])
-        #barPrefix = '('+str(kfb_cnt)+'/'+str(kfb_total)+')...' + kfb_fileName
-        # bar = progressbar.ProgressBar(prefix=barPrefix, max_value=window_nums).start()  
         for batch_i, (xs, ys, input_imgs) in enumerate(dataloader):
             # Get detections
             # print(input_imgs.shape)
@@ -205,11 +201,11 @@ def main():
                         bbox_dict["p"] = round(float(conf), 5)
                         # print(bbox_dict)
                         bboxes_list.append(bbox_dict)
-            # 写入json
-            json_fileName = kfb_fileName.split('.')[0] + '.json'
-            json_filePath = os.path.join(OUT_JSON_PATH, json_fileName)
-            with open(json_filePath, 'w') as outfile:  
-                outfile.write(json.dumps(bboxes_list))
+        # 写入json
+        json_fileName = kfb_fileName.split('.')[0] + '.json'
+        json_filePath = os.path.join(OUT_JSON_PATH, json_fileName)
+        with open(json_filePath, 'w') as outfile:  
+            outfile.write(json.dumps(bboxes_list))
 
 
 if __name__ == '__main__':

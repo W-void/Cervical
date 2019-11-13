@@ -87,8 +87,8 @@ def main():
     #     OUT_JSON_PATH = args.img_output
 
     SCALE       = 20          # 缩放尺度
-    window_size = (416, 416)  # 滑窗大小(w, h)
-    step_size   = (300, 300)  # 滑窗步进(dx, dy)
+    window_size = (600, 600)  # 滑窗大小(w, h)
+    step_size   = (550, 550)  # 滑窗步进(dx, dy)
     checkpoint  = 0           # 从检查点开始，检查点为上一次最后生成的json文件的顺序索引
 
     # 初始化模型
@@ -151,7 +151,7 @@ def main():
             # 截取滑窗图片
             window_img = kfbread.ReadRoi(x, y, w, h, SCALE)
             # print (w)
-            print (h)
+            # print (h)
             # 目标检测
             # result = inference_detector(model, window_img)
             with torch.no_grad():
@@ -165,10 +165,10 @@ def main():
             # 若有检测结果
             if detections[0] is not None: #.shape[0] > 0:
                 # 存储结果
-                print(detections[0])
+                # print(detections[0].shape)
                 detection = detections[0].tolist()
                 for xmin, ymin, xmax, ymax, conf, cls_conf, cls_pred in detection:
-                    print(xmin, ymin, xmax, ymax, conf, cls_conf, cls_pred)
+                    # print(xmin, ymin, xmax, ymax, conf, cls_conf, cls_pred)
                     bbox_dict = {}  # 必须定义在这里(每次进入for循环都是实例化新的字典对象, 每次append的元素都指向新的对象),
                                     # 不能定义在前面(实质只有一个实例化的字典对象, 导致append的每一个元素都指向同一个对象)
                     bbox_dict["x"] = int(round(x + xmin))
@@ -176,7 +176,7 @@ def main():
                     bbox_dict["w"] = int(round(xmax - xmin))
                     bbox_dict["h"] = int(round(ymax - ymin))
                     bbox_dict["p"] = round(float(conf), 5)
-                    print(bbox_dict)
+                    # print(bbox_dict)
                     bboxes_list.append(bbox_dict)    
                 # 显示检测结果 -option
                 # result_imgName = kfb_fileName.split('.')[0] + '_win' + str(window_cnt) + '.jpg'
